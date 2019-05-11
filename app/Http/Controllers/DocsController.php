@@ -16,7 +16,6 @@ class DocsController extends Controller
     public function index($room_id, Request $request)
     {
         if(isset($request->version)){
-            print("here");
             $docs = Docs::where('room_id', $room_id)->where('version', $request->version)->first();
         }else{
             $docs = Docs::where('room_id', $room_id)->orderBy('version', 'desc')->first();

@@ -32,3 +32,4 @@ Route::middleware('auth:api')->group(function () {
 
 Route::get('room', 'RoomsController@index');
 
+Route::get('room/{room_id}/doc', 'DocsController@index');
