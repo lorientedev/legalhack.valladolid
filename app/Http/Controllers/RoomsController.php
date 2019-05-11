@@ -38,12 +38,14 @@ class RoomsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3',
+            'description' => 'required'
         ]);
 
         $user = auth()->user();
         $room = Rooms::create([
             'name' => $request->name,
-            'creator' => $user->id
+            'creator' => $user->id,
+            'description' => $request->description
         ]);
 
         return response()->json(['room', $room]);
@@ -83,8 +85,9 @@ class RoomsController extends Controller
         $this->validate($request, [
             'id' => 'required',
             'name' => 'required|min:3',
+            'description' => 'required'
         ]);
-        $room = Rooms::where('id', $request->id)->update(['name' => $request->name]);
+        $room = Rooms::where('id', $request->id)->update(['name' => $request->name, 'description' => $request->description]);
         return response()->json(["room" => $room]);
     }
 

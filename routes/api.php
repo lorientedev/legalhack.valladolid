@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+header("Access-Control-Allow-Origin: *");
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
- 
+
 Route::middleware('auth:api')->group(function () {
     Route::get('user', 'PassportController@details');
     
     Route::resource('room', 'RoomsController');
     Route::resource('room_moderator', 'RoomsModeratorController');
+    Route::resource('room/{room_id}/ideas', 'IdeasController');
+    Route::resource('room/{room_id}/doc', 'DocsController');
 });
+
+Route::get('room', 'RoomsController@index');
+
